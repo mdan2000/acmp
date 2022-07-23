@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 
-
-void printMatrix(std::vector<std::vector<int>>& g) {
+template<typename T>
+void printMatrix(std::vector<std::vector<T>>& g) {
     for (const auto& row : g) {
         for (const auto& el : row) {
             std::cout << el << ' ';
