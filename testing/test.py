@@ -7,9 +7,6 @@ import stress_tests
 
 def createParser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--task', nargs=1, help="""
-        Id of task. Script will be work from repo_dir/taskId
-        """)
     parser.add_argument('-l', '--language', nargs=1, default='c++', help="""
         Language of your source.
         If it C++ - it will compile 'g++ source_name -o prog -std=c++17'
