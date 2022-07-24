@@ -41,11 +41,16 @@ def compile_cpp(namespace):
         with open(compile_res_filename, 'r') as r:
             error = r.read()
         print(f'Can\'t compile c++, error:\n {error}')
-        return
+        return False
+    return True
 
 
 def run_cpp(namespace):
-    compile_cpp(namespace)
+    is_compile = compile_cpp(namespace)
+    
+    if not is_compile:
+        return
+
     tests = stress_tests.get_tests()
     ans = stress_tests.get_ans()
 
