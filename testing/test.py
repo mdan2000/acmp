@@ -1,4 +1,5 @@
 import argparse
+import subprocess
 import os
 import sys
 from importlib import import_module
@@ -34,10 +35,15 @@ def make_test(test):
 
 def compile_cpp(namespace):
     compile_res_filename = 'compile_res.txt'
-    compile_command = f'g++ {namespace.source} -o prog -std=c++17 > {compile_res_filename}'
-    os.system(compile_command)
+    with open(compile_res_filename, 'w') as w:
+        source_path = os.path.join(os.getcwd(),namespace.source)
+        p = subprocess.Popen(['g++', source_path, '-o', 'prog', '-std=c++17'],
+            stderr=w)
+        p.wait()
+    print('lol')
     
-    if os.path.getsize(compile_res_filename):
+    if os.path.getsize(compile_res_filename) != 0:
+        print('kek')
         with open(compile_res_filename, 'r') as r:
             error = r.read()
         print(f'Can\'t compile c++, error:\n {error}')
